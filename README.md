@@ -1,14 +1,16 @@
 ---
-title: Gin
-description: A Gin server
+title: TaskBot
+description: A lark/feishu bot for tasks, use openai.
 tags:
   - gin
   - golang
+  - lark
+  - bot
+  - openai
+  - ChatGPT
 ---
 
-# Gin Example
-
-This example starts an [Gin](https://gin-gonic.com/) server.
+# For leaning 
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/dTvvSf)
 
@@ -23,5 +25,3 @@ This example starts an [Gin](https://gin-gonic.com/) server.
 - Start the development server `railway run go run main.go`
 
 ## 📝 Notes
-
-The server started simply returns a `message: Hello world!` payload in JSON. The server code is located in the `main.go` file.
