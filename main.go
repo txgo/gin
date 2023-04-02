@@ -41,7 +41,7 @@ func main() {
 	config.HTTP_PORT = os.Getenv("HTTP_PORT")
 	config.OPENAI_KEY = os.Getenv("OPENAI_KEY")
 
-	fmt.Printf("%+v\n", config)
+	fmt.Printf("+%v %v %v\n", config.BOT_NAME, config.PORT, config.HTTP_PORT)
 
 	// 创建注册消息处理器
 	handler := dispatcher.NewEventDispatcher(config.APP_VERIFICATION_TOKEN, config.APP_ENCRYPT_KEY).OnP2MessageReceiveV1(func(ctx context.Context, event *larkim.P2MessageReceiveV1) error {
@@ -78,7 +78,7 @@ func main() {
 	g.POST("/webhook/card", sdkginext.NewCardActionHandlerFunc(cardHandler))
 
 	// 启动服务
-	err := g.Run(":9999")
+	err := g.Run(":" + config.PORT)
 	if err != nil {
 		panic(err)
 	}
