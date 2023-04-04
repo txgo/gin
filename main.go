@@ -55,7 +55,7 @@ func main() {
 		OnP2MessageReceiveV1(func(ctx context.Context, event *larkim.P2MessageReceiveV1) error {
 			log.Printf("Received P2 message receive event: %v", larkcore.Prettify(event))
 
-			// generate a response using the OpenAI API
+			// generate a completion using the OpenAI API
 			completion, err := generateResponse(ctx, *event.Event.Message.Content, openaiClient)
 			if err != nil {
 				log.Printf("Error generating response: %v", err)
@@ -64,9 +64,12 @@ func main() {
 
 			log.Printf("Received Openai completion: %v", larkcore.Prettify(completion))
 
+			// Prepare response message
 			respMsg := larkim.NewTextMsgBuilder().Text(completion).Build()
 
 			chatId := event.Event.Message.ChatId
+
+			// send respMsg back to chat
 			resp, err := client.Im.Message.Create(context.Background(), larkim.NewCreateMessageReqBuilder().
 				ReceiveIdType(larkim.ReceiveIdTypeChatId).
 				Body(larkim.NewCreateMessageReqBodyBuilder().
